@@ -1,11 +1,18 @@
 <script>
-	export let name;
+	import Header from "./SharedComponents/Header.svelte";
+	import Home from "./Pages/HomePage/Homepage.svelte";
+	import DetailPage from "./Pages/DetailPage/DetailPage.svelte";
+	import { Router, Route } from "svelte-routing";
+	export let url = "/";
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Indha project a mudikurom. visit <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn svelte <p/>
-</main>
+<Router {url}>
+	<Header />
+	<main>
+		<Route path="/" component={Home} />
+		<Route path="/detail" component={DetailPage} />
+	</main>
+</Router>
 
 <style>
 	main {

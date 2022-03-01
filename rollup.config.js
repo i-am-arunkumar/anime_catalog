@@ -41,7 +41,7 @@ export default {
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
-			}
+			},
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
@@ -68,7 +68,7 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),		
 	],
 	watch: {
 		clearScreen: false
