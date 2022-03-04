@@ -6,21 +6,27 @@
 	export let url = "/";
 </script>
 
+<svelte:head>
+	<style>
+		body{
+			background-color: #e0e0e0;
+		}
+	</style>
+</svelte:head>
+
 <Router {url}>
 	<Header />
-	<main>
-		<Route path="/" component={Home} />
-		<Route path="/detail" component={DetailPage} />
-	</main>
+	<div class="topbar-spacer" />
+	<Route path="/" component={Home} />
+	<Route path="/details" component={DetailPage} />
 </Router>
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+<style  >
+	.topbar-spacer {
+		height: 64px;
 	}
+	
+
 
 	h1 {
 		color: #ff3e00;

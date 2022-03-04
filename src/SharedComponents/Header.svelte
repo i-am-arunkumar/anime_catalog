@@ -15,12 +15,15 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-redundant-roles -->
 <nav
   style="border-radius: 8px;"
   class="navbar is-primary"
   role="navigation"
   aria-label="main navigation"
 >
+<!-- <nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
+   -->
   <div class="navbar-brand">
     <Link class="navbar-item" to="/">
       <img alt="" src="favicon.png" width="28" height="28" />
