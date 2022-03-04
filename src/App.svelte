@@ -8,6 +8,8 @@
 
 <Router {url}>
 	<Header />
+	<div class="topbar-spacer" >
+	</div>
 	<main>
 		<Route path="/" component={Home} />
 		<Route path="/detail" component={DetailPage} />
@@ -15,6 +17,11 @@
 </Router>
 
 <style>
+
+	.topbar-spacer {
+		height: 64px;
+	}
+
 	main {
 		text-align: center;
 		padding: 1em;

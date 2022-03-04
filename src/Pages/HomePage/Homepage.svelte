@@ -1,22 +1,21 @@
 <script>
-    import { onMount } from "svelte";
-	import { fetch } from "../../utils/database";
+	import { onMount } from "svelte";
+	import { getTopAnimes } from "../../utils/api";
+	import { data } from "./data";
+	import AnimeGrid from "../../SharedComponents/AnimeGrid.svelte";
 	import Transition from "../../SharedComponents/Transition.svelte";
 
-    let msg;
+	let animes;
 	onMount(() => {
-		fetch("general_msg").then((a) => {
-			msg = a;
-		});
+		animes = data;
+		// getTopAnimes().then(res => {
+		// 	animes = res.data
+		// })
 	});
 </script>
+
 <Transition>
-<div>
-    {#if msg}
-		<h1>{msg}</h1>	
-	{/if}
-	<p>
-		Indha project a mudikurom. visit <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn svelte
-	</p>
-</div>
+	<AnimeGrid  animeList={animes} />
 </Transition>
+
+
