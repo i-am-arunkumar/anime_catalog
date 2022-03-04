@@ -8,10 +8,8 @@
 
 <Router {url}>
 	<Header />
-	<main>
-		<Route path="/" component={Home} />
-		<Route path="/detail" component={DetailPage} />
-	</main>
+	<Route path="/" component={Home} />
+	<Route path="/detail" component={DetailPage} />
 </Router>
 
 <style>
