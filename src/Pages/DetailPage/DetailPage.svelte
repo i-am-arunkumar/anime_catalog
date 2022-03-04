@@ -1,13 +1,16 @@
 <script>
     import Transition from "../../SharedComponents/Transition.svelte";
-    let src = 'aot.jpg'
+    import { onMount } from "svelte";
+    import { selectedAnime as data } from "../../store/anime";
+    let src = $data.images.webp.large_image_url;
+    onMount(() => window.scrollTo(0,0))
 </script>
 
 <Transition>
 <div>
 <div class="p-3  has-background-light">
-    <div class="title">Shingeki no Kyojin</div>
-    <div class="subtitle">Attack on Titan</div>
+    <div class="title">{$data.title_japanese}</div>
+    <div class="subtitle">{$data.title_english}</div>
 </div>
     <div class="columns ">
         <div class="column mt-4 is-one-third">
@@ -18,66 +21,66 @@
                 <div class="parallax-bottom-right" tabindex="4"></div>
                 <div class="parallax-content">
                   <div class="parallax-front">
-                    <div class="title" style="color:white" >Shingeki no Kyojin</div>
+                    <div class="title" style="color:white" >{$data.title}</div>
                   </div>
                   <div class="parallax-back">
                     <img src={src} class="picture img-responsive rounded" />
                   </div>
                 </div>
               </div>
-              <article class="panel mt-6">
+              <article class="panel mt-6 is-text-center">
                 <p class="panel-heading has-text-white	 is-primary">
                   Information
                 </p>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Type:</h1>
-                    <p class="subtitle is-6">TV</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Episodes:</h1>
-                    <p class="subtitle is-6">25</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Status:</h1>
-                    <p class="subtitle is-6">Finished Airing</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Licensors:</h1>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Type: </h1>
+                    <p class="subtitle is-6">{$data.type}</p>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Episodes: </h1>
+                    <p class="subtitle is-6">{$data.episodes}</p>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Status: </h1>
+                    <p class="subtitle is-6">{$data.status}</p>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Licensors: </h1>
                     <p class="subtitle is-6">Funimation</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Studios:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Studios: </h1>
                     <p class="subtitle is-6">Wit Studio</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Source:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Source: </h1>
                     <p class="subtitle is-6">Manga</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Genres:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Genres: </h1>
                     <p class="subtitle is-6">Action, Drama, Fantasy, Mystery</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Themes:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Themes: </h1>
                     <p class="subtitle is-6">Military, Super Power</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Demographic:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Demographic: </h1>
                     <p class="subtitle is-6">Shounen</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Duration:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Duration: </h1>
                     <p class="subtitle is-6">24 min. per ep.</p>
-                </a>
-                <a class="panel-block is-active">
-                    <h1 class="title is-6">Rating:</h1>
+                </div>
+                <div class="panel-block is-active">
+                    <h1 class="title is-6 mr-2">Rating: </h1>
                     <p class="subtitle is-6">R - 17+ (violence & profanity)</p>
-                </a>
+                </div>
                 
 
               </article> 
         </div>
-        <div class="column mt-4">
+        <div class="column mt-4 left-container">
             <div class="tabs is-boxed">
                 <ul>
                   <li class="is-active">
@@ -104,16 +107,16 @@
                     <footer class="card-footer">
                     <div class="card-footer-item item">
                         <h1 class="subtitle is-6">Score</h1>
-                        <h2 class="title is-4">8.52</h2>
+                        <h2 class="title is-4">{$data.score}</h2>
 
                     </div>
                     <div class="card-footer-item item">
                         <h1 class="subtitle is-6">Ranked</h1>
-                        <h2 class="title is-4">#1</h2>
+                        <h2 class="title is-4">#{$data.rank}</h2>
                         </div>
                         <div class="card-footer-item item">
                             <h1 class="subtitle is-6">Popularity</h1>
-                        <h2 class="title is-4">#1</h2>
+                        <h2 class="title is-4">#{$data.popularity}</h2>
                         </div>
                     </footer>
                 </div>  
@@ -127,15 +130,7 @@
                </div>    
                <div class="container">
                 <h1 class="title is-4">Synopsis</h1>
-                <p>Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls. 
-                    What makes these giants truly terrifying is that their taste for human flesh is not born out of hunger but what appears to be out of pleasure.
-                    To ensure their survival, the remnants of humanity began living within defensive barriers, resulting in one hundred years without a single titan encounter. 
-                    However, that fragile calm is soon shattered when a colossal Titan manages to breach the supposedly impregnable outer wall, reigniting the fight for survival against the man-eating abominations.
-                </p>
-                <p>After witnessing a horrific personal loss at the hands of the invading creatures, Eren Yeager dedicates his life to their eradication by enlisting into the Survey Corps, 
-                    an elite military unit that combats the merciless humanoids outside the protection of the walls. Eren, his adopted sister Mikasa Ackerman, 
-                    and his childhood friend Armin Arlert join the brutal war against the Titans and race to discover a way of defeating them before the last walls are breached.
-                </p>
+                <p>{$data.synopsis}</p>
              </div>  
              <div class="card">
                 <h1 class="title is-4">Review</h1>
@@ -178,6 +173,11 @@
 <style>
     .item{
         flex-direction : column;
+    }
+
+
+    .left-container{
+      background-color: #fff;
     }
     .container{
         margin: 16px;

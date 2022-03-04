@@ -7,6 +7,7 @@
 
 	let animes;
 	onMount(() => {
+		window.scrollTo(0,0)
 		animes = data;
 		// getTopAnimes().then(res => {
 		// 	animes = res.data
