@@ -8,16 +8,12 @@
 
 <Router {url}>
 	<Header />
-	<div class="topbar-spacer" >
-	</div>
-	<main>
-		<Route path="/" component={Home} />
-		<Route path="/detail" component={DetailPage} />
-	</main>
+	<div class="topbar-spacer" />
+	<Route path="/" component={Home} />
+	<Route path="/detail" component={DetailPage} />
 </Router>
 
 <style>
-
 	.topbar-spacer {
 		height: 64px;
 	}

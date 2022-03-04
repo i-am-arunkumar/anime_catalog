@@ -1,5 +1,8 @@
 <script>
   import { Link } from "svelte-routing";
+  import SignInButton from "../Pages/Authentication/Signin.svelte";
+  import LogInButton from "../Pages/Authentication/Login.svelte";
+  
 </script>
 
 <nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
@@ -21,14 +24,11 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <button class="button is-light">
-            <strong>Sign up</strong>
-          </button>
-          <button class="button is-secondary is-primary is-dark">
-            Log in
-          </button>
+           <SignInButton/>
+        <LogInButton/>          
         </div>
       </div>
     </div>
   </div>
+
 </nav>  
