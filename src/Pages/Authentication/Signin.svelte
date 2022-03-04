@@ -86,7 +86,7 @@ else{
   <div class="modal-background" on:click={toggleSignin} ></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Sign in</p>
+      <p class="modal-card-title">Sign up</p>
       <button  on:click={toggleSignin} class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">

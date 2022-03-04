@@ -57,7 +57,7 @@
   <div class="modal-background" on:click={toggleLogin} />
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Sign in</p>
+      <p class="modal-card-title">Log in</p>
       <button on:click={toggleLogin} class="delete" aria-label="close" />
     </header>
     <section class="modal-card-body">
