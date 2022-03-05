@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "svelte-routing";
+  import { Link, link } from "svelte-routing";
   import SignInButton from "../Pages/Authentication/Signin.svelte";
   import LogInButton from "../Pages/Authentication/Login.svelte";
   import {
@@ -69,9 +69,10 @@
         Random Anime
       </a>
       <a
-        class="navbar-item is-clickable "
+        class="navbar-item is-clickable"
         id="recommendation"
-        on:click={navigate_filter}
+        href="/recommendations"
+        use:link
       >
         Recommendations
       </a>
