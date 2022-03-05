@@ -1,22 +1,21 @@
 <script>
-  import { selectedAnime as data } from "../../store/anime";
-  //import YouTube from "svelte-youtube";
-  let utubelink = $data.trailer.embed_url;
+  export let data
+  let utubelink = data.trailer.embed_url;
 </script>
 
 <div class="card mx-6">
   <footer class="card-footer">
     <div class="card-footer-item item">
       <h1 class="subtitle is-6">Score</h1>
-      <h2 class="title is-4">{$data.score}</h2>
+      <h2 class="title is-4">{data.score}</h2>
     </div>
     <div class="card-footer-item item">
       <h1 class="subtitle is-6">Ranked</h1>
-      <h2 class="title is-4">#{$data.rank}</h2>
+      <h2 class="title is-4">#{data.rank}</h2>
     </div>
     <div class="card-footer-item item">
       <h1 class="subtitle is-6">Popularity</h1>
-      <h2 class="title is-4">#{$data.popularity}</h2>
+      <h2 class="title is-4">#{data.popularity}</h2>
     </div>
   </footer>
 </div>
@@ -30,9 +29,9 @@
 </div>
 <div class="container">
   <h1 class="title is-4">Synopsis</h1>
-  <p>{$data.synopsis}</p>
+  <p>{data.synopsis}</p>
   <div class="video mx-2">
-    <h1 class="title is-4">Trailer of {$data.title_english}</h1>
+    <h1 class="title is-4">Trailer of {data.title_english}</h1>
       <div class="player video-promotion">
         <a>
           <iframe
@@ -61,7 +60,6 @@
     font-size: 16px;
   }
   .video {
-    background-color: rgb(243, 243, 243);
     width: 640px;
     height: 390px;
     margin-top: 16px;

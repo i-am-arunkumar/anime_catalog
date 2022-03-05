@@ -2,22 +2,24 @@
   import { Link } from "svelte-routing";
   import SignInButton from "../Pages/Authentication/Signin.svelte";
   import LogInButton from "../Pages/Authentication/Login.svelte";
-  import { setFilter,randomAnime, getCurrentFilter } from "../utils/filter_utils";
+  import {
+    setFilter,
+    randomAnime,
+    getCurrentFilter,
+  } from "../utils/filter_utils";
+  import { current_filter } from "../store/anime";
   import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
   function navigate_filter(e) {
-    if(e.target.id)
-      setFilter(e.target.id)
+    if (e.target.id) setFilter(e.target.id);
   }
 
   const auth = getAuth();
   let user = auth.currentUser;
   onAuthStateChanged(auth, (u) => (user = u));
 
-  function signout(e){
-    if(confirm("Are you sure you want to log out!") == true)
-    auth.signOut();
+  function signout(e) {
+    if (confirm("Are you sure you want to log out!") == true) auth.signOut();
   }
 </script>
 
@@ -28,7 +30,7 @@
   role="navigation"
   aria-label="main navigation"
 >
-<!-- <nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
+  <!-- <nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
    -->
   <div class="navbar-brand">
     <Link class="navbar-item" to="/">
@@ -39,22 +41,40 @@
 
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class={"navbar-item is-clickable" + ("top" === getCurrentFilter() && "is-active") } id="top" on:click={navigate_filter} >
+      <a
+        class={"navbar-item is-clickable " +
+          ("top" === $current_filter.id && "is-active")}
+        id="top"
+        on:click={navigate_filter}
+      >
         Top Animes
       </a>
-      <a class={"navbar-item is-clickable"+ ("popular" === getCurrentFilter() && "is-active")} id="popular" on:click={navigate_filter}>
+      <a
+        class={"navbar-item is-clickable " +
+          ("popular" === $current_filter.id && "is-active")}
+        id="popular"
+        on:click={navigate_filter}
+      >
         Popular
       </a>
-      <a class={"navbar-item is-clickable" + ("latest" === getCurrentFilter() && "is-active")} id="latest" on:click={navigate_filter}>
+      <a
+        class={"navbar-item is-clickable " +
+          ("latest" === $current_filter.id && "is-active")}
+        id="latest"
+        on:click={navigate_filter}
+      >
         Latest
       </a>
-      <a class="navbar-item is-clickable" id="random" on:click={randomAnime}>
+      <a class="navbar-item is-clickable " id="random" on:click={randomAnime}>
         Random Anime
       </a>
-      <a class="navbar-item is-clickable" id="recommendation" on:click={navigate_filter}>
+      <a
+        class="navbar-item is-clickable "
+        id="recommendation"
+        on:click={navigate_filter}
+      >
         Recommendations
       </a>
-      
     </div>
 
     <div class="navbar-end">
@@ -64,9 +84,9 @@
             <SignInButton />
             <LogInButton />
           {:else}
-          <button on:click={signout} class="button is-light">
-            <strong>Log out</strong>
-          </button>
+            <button on:click={signout} class="button is-light">
+              <strong>Log out</strong>
+            </button>
           {/if}
         </div>
       </div>

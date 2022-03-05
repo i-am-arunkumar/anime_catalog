@@ -1,15 +1,14 @@
-
-import { getLatestAnimes,getPopularAnimes, getRandomAnimes, getTopAnimes, getRecommendedAnimes, searchAnime } from "./api";
+import { getLatestAnimes, getPopularAnimes, getRandomAnimes, getTopAnimes, getRecommendedAnimes, searchAnime } from "./api";
 import { current_filter, animeList, selectedAnime, currentPage, pagination } from "../store/anime";
 import { get_store_value } from "svelte/internal";
 import { navigate } from "svelte-routing";
 
 const filter_fetch = {
-    "top" : getTopAnimes,
-    "latest" : getLatestAnimes,
-    "recommendations" : getRecommendedAnimes,
-    "search" : searchAnime,
-    "popular" : getPopularAnimes
+    "top": getTopAnimes,
+    "latest": getLatestAnimes,
+    "recommendations": getRecommendedAnimes,
+    "search": searchAnime,
+    "popular": getPopularAnimes
 }
 
 export function getCurrentFilter() {
@@ -22,16 +21,16 @@ export async function randomAnime() {
     selectedAnime.set(null)
     return getRandomAnimes().then(data => {
         selectedAnime.set(data.data)
-    }) 
+    })
 }
 
 
-export function setFilter(filter, params,start_from_begining=true) {
-    if(start_from_begining)
+export function setFilter(filter, params, start_from_begining = true) {
+    if (start_from_begining)
         currentPage.set(1)
-    if(location.pathname !== "/") navigate("/")
+    if (location.pathname !== "/") navigate("/")
     animeList.set(null)
-    current_filter.set({id : filter, params : params})
+    current_filter.set({ id: filter, params: params })
     filter_fetch[filter](params).then(res => {
         pagination.set(res.pagination)
         animeList.set(res.data)
