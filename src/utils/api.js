@@ -13,6 +13,11 @@ async function url(endpoint, params_obj = {}) {
     return fetch(`${baseUrl}${endpoint}${paramsStr}`).then(e => e.json())
 }
 
+export async function getAnimeById(id) {
+    return url(`anime/${id}`)
+}
+
+
 export async function getLatestAnimes() {
     return url(`seasons/now`)
 }

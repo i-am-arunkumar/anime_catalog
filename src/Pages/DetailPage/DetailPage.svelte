@@ -6,13 +6,21 @@ import Reviews from "./Reviews.svelte";
 import Details from "./Details.svelte";
 import Recommendations from "./Recommendations.svelte";
 import { selectedAnime as data } from "../../store/anime";
+import { getAnimeById } from "../../utils/api";
   
+export let id
 
   function getImage() {
     return $data.images && $data.images.webp.large_image_url;
   }
     
-  onMount(() => window.scrollTo(0, 0));
+  onMount(() => {
+    if(id){
+      getAnimeById(id).then(e => {
+        data.set(e.data)
+      })
+    }
+  });
 
   let tabs = ["Details", "Episodes", "Reviews", "Recommendations"];
   let selected_index = 0;
@@ -26,8 +34,8 @@ import { selectedAnime as data } from "../../store/anime";
  {#if $data !== null}
  <div>
   <div class="p-3  has-background-light">
-    <div class="title">{$data.title_japanese}</div>
-    <div class="subtitle">{$data.title_english}</div>
+    <div class="title">{$data.title}</div>
+    <div class="subtitle">{$data.title_japanese || ""}</div>
   </div>
   <div class="columns ">
     <div class="column mt-4 is-one-third">
@@ -36,9 +44,9 @@ import { selectedAnime as data } from "../../store/anime";
         <div class="parallax-top-right" tabindex="2" />
         <div class="parallax-bottom-left" tabindex="3" />
         <div class="parallax-bottom-right" tabindex="4" />
-        <div class="parallax-content">
+        <div class="parallax-content">  
           <div class="parallax-front">
-            <div class="title" style="color:white">{$data.title}</div>
+            <div class="title" style="color:white">{$data.title_english || $data.title}</div>
           </div>
           <div class="parallax-back">
             <img src={getImage()} class="picture img-responsive rounded" />
