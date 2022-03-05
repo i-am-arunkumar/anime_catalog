@@ -1,4 +1,5 @@
 <script>
+	import { navigate } from 'svelte-routing';
 	import { onMount } from "svelte";
 	import { animeList, current_filter } from "../../store/anime";
 	import { setFilter } from "../../utils/filter_utils";
@@ -7,6 +8,12 @@
 	import FilterPanel from "./FilterPanel.svelte";
 
 	onMount(() => {
+
+		if($current_filter.id === "recommendations"){
+			navigate("/recommendations")
+			return
+		}
+
 		if (!$animeList) setFilter($current_filter.id, $current_filter.params);
 		window.scrollTo(0, 0);
 	});

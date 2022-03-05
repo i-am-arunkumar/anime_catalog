@@ -14,6 +14,8 @@
     if (e.target.id) setFilter(e.target.id);
   }
 
+  $: location.pathname;
+
   const auth = getAuth();
   let user = auth.currentUser;
   onAuthStateChanged(auth, (u) => (user = u));
@@ -69,9 +71,12 @@
         Random Anime
       </a>
       <a
-        class="navbar-item is-clickable"
+        class={"navbar-item is-clickable" +
+          ("recommendations" === $current_filter.id && "is-active")}
         id="recommendation"
         href="/recommendations"
+        on:click={() =>
+          current_filter.set({ id: "recommendations", params: null })}
         use:link
       >
         Recommendations

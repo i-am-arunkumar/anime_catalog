@@ -157,6 +157,7 @@
 
   .picture {
     width: 100%;
+    min-height: 100px;
     border-radius: 8px;
   }
   .producer {

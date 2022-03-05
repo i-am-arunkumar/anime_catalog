@@ -1,5 +1,5 @@
 <script>
-  export let data
+  export let data;
   let utubelink = data.trailer.embed_url;
 </script>
 
@@ -30,8 +30,9 @@
 <div class="container">
   <h1 class="title is-4">Synopsis</h1>
   <p>{data.synopsis}</p>
-  <div class="video mx-2">
-    <h1 class="title is-4">Trailer of {data.title_english}</h1>
+  {#if utubelink}
+    <div class="video mx-2">
+      <h1 class="title is-4">Official Trailer</h1>
       <div class="player video-promotion">
         <a>
           <iframe
@@ -43,8 +44,9 @@
             frameborder="0"
           />
         </a>
-      </div> 
-  </div>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style>
