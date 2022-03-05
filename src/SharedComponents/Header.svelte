@@ -3,6 +3,8 @@
   import SignInButton from "../Pages/Authentication/Signin.svelte";
   import LogInButton from "../Pages/Authentication/Login.svelte";
   import { setFilter,randomAnime } from "../utils/filter_utils";
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 
   function navigate_filter(e) {
     console.log(e.target.id);
@@ -10,19 +12,35 @@
       setFilter(e.target.id)
   }
 
+  const auth = getAuth();
+  let user = auth.currentUser;
+  onAuthStateChanged(auth, (u) => (user = u));
+
+  function signout(e){
+    if(confirm("Are you sure you want to log out!") == true)
+    auth.signOut();
+  }
 </script>
 
-<nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
-  
+<!-- svelte-ignore a11y-no-redundant-roles -->
+<nav
+  style="border-radius: 8px;"
+  class="navbar is-primary"
+  role="navigation"
+  aria-label="main navigation"
+>
+<!-- <nav style="border-radius: 8px;" class="navbar is-primary is-fixed-top m-2" role="navigation" aria-label="main navigation">
+   -->
   <div class="navbar-brand">
     <Link class="navbar-item" to="/">
-      <img alt="" src="favicon.png" width="28" height="28">
-      <span class="ml-2 is-size-4 has-text-weight-bold" >ANICAT</span>
+      <img alt="" src="favicon.png" width="28" height="28" />
+      <span class="ml-2 is-size-4 has-text-weight-bold">ANICAT</span>
     </Link>
   </div>
 
   <div class="navbar-menu">
     <div class="navbar-start">
+<<<<<<< HEAD
       <a class="navbar-item is-clickable" id="top" on:click={navigate_filter} >
         Top Animes
       </a>
@@ -35,16 +53,24 @@
       <a class="navbar-item is-clickable" id="recommendation" on:click={navigate_filter}>
         Recommendations
       </a>
+=======
+      <Link to="detail" class="navbar-item">Laville</Link>
+>>>>>>> a87b7e7c61926466fb28980a49c82af6c64499e2
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-           <SignInButton/>
-        <LogInButton/>          
+          {#if !user}
+            <SignInButton />
+            <LogInButton />
+          {:else}
+          <button on:click={signout} class="button is-light">
+            <strong>Log out</strong>
+          </button>
+          {/if}
         </div>
       </div>
     </div>
   </div>
-
-</nav>  
+</nav>
