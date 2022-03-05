@@ -2,12 +2,11 @@
   import { Link } from "svelte-routing";
   import SignInButton from "../Pages/Authentication/Signin.svelte";
   import LogInButton from "../Pages/Authentication/Login.svelte";
-  import { setFilter,randomAnime } from "../utils/filter_utils";
+  import { setFilter,randomAnime, getCurrentFilter } from "../utils/filter_utils";
   import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
   function navigate_filter(e) {
-    console.log(e.target.id);
     if(e.target.id)
       setFilter(e.target.id)
   }
@@ -25,7 +24,7 @@
 <!-- svelte-ignore a11y-no-redundant-roles -->
 <nav
   style="border-radius: 8px;"
-  class="navbar is-primary"
+  class="navbar is-primary is-fixed-top m-2"
   role="navigation"
   aria-label="main navigation"
 >
@@ -40,22 +39,22 @@
 
   <div class="navbar-menu">
     <div class="navbar-start">
-<<<<<<< HEAD
-      <a class="navbar-item is-clickable" id="top" on:click={navigate_filter} >
+      <a class={"navbar-item is-clickable" + ("top" === getCurrentFilter() && "is-active") } id="top" on:click={navigate_filter} >
         Top Animes
       </a>
-      <a class="navbar-item is-clickable" id="latest" on:click={navigate_filter}>
+      <a class={"navbar-item is-clickable"+ ("popular" === getCurrentFilter() && "is-active")} id="popular" on:click={navigate_filter}>
+        Popular
+      </a>
+      <a class={"navbar-item is-clickable" + ("latest" === getCurrentFilter() && "is-active")} id="latest" on:click={navigate_filter}>
         Latest
       </a>
       <a class="navbar-item is-clickable" id="random" on:click={randomAnime}>
-        Random Animes
+        Random Anime
       </a>
       <a class="navbar-item is-clickable" id="recommendation" on:click={navigate_filter}>
         Recommendations
       </a>
-=======
-      <Link to="detail" class="navbar-item">Laville</Link>
->>>>>>> a87b7e7c61926466fb28980a49c82af6c64499e2
+      
     </div>
 
     <div class="navbar-end">

@@ -1,17 +1,20 @@
-const credentials = {
-    id: "f15cb7c223c9d8fe91480ea1a33ded2d",
-    secret: "6059444a586fe1d474223adee404787d512e76d31ceab3c3a06c277c6f45f2fe"
-}
-
+import { getCurrentPage } from "./pagination";
 
 const baseUrl = "https://api.jikan.moe/v4/"
 
-async function url(endpoint) {
-    return fetch(`${baseUrl}${endpoint}`).then(e => e.json())
+async function url(endpoint, params_obj = {}) {
+    let params = {...params_obj, page : getCurrentPage(), limit : 24}
+    let paramsStr = "?"
+    Object.entries(params).forEach(([key, val], i) => {
+        if (val)
+            paramsStr += (key + "=" + val + "&")
+    })
+    console.log(`${baseUrl}${endpoint}${paramsStr}`);
+    return fetch(`${baseUrl}${endpoint}${paramsStr}`).then(e => e.json())
 }
 
 export async function getLatestAnimes() {
-    return url("anime?order_by=start_date&sort=asc")
+    return url(`seasons/now`)
 }
 
 export async function getTopAnimes() {
@@ -27,13 +30,12 @@ export async function getRecommendedAnimes() {
     return url("recommendations/anime")
 }
 
+export async function getPopularAnimes() {
+    return url("anime", { order_by: "favorites", sort: "desc" })
+}
+
 export async function searchAnime(params) {
-    let { q, genre, status } = params
-    let base = "anime?"
-    Object.entries(params).forEach(([key,val],i) => {
-        base +=  (key + "=" + val + "&")
-    })
-    return url(base)
+    return url("anime",params)
 }
 
 

@@ -1,5 +1,7 @@
 <script>
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import { fly } from 'svelte/transition';
+
   let signInModel;
 
   let email;
@@ -53,7 +55,8 @@
   <strong>Log in</strong>
 </button>
 
-<div class="modal" bind:this={signInModel}>
+<div class="modal" bind:this={signInModel} in:fly="{{ y: -50, duration: 250, delay: 300 }}"
+out:fly="{{ y: -50, duration: 250 }}" >
   <div class="modal-background" on:click={toggleLogin} />
   <div class="modal-card">
     <header class="modal-card-head">

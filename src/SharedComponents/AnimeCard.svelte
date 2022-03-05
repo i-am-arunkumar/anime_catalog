@@ -30,16 +30,16 @@
         </div>
         <div class="p-4 card-content has-text-left">
             <p class=" mb-2 title is-5">{data.title}</p>
-            <p class="is-size-6">{`${data.episodes} episodes`}</p>
+            <p class="is-size-6">{data.episodes ? (data.type === "movie" || data.episodes === 1 ? "Movie" :`${data.episodes} episodes`) : "Ongoing"}</p>
         </div>
-        <div class="card-footer level">
+        <div class="card-footer level m-0">
             <div class="level-left">
                 <div class="m-0 stars block p-2" />
-                <div class="heading">{data.score}</div>
+                <div class="heading">{data.score || ""}</div>
             </div>
             <div class="level-item" />
             <div class="level-right p-2">
-                <div class="heading">{data.year}</div>
+                <div class="heading">{data.year || ""}</div>
             </div>
         </div>
         <span id="ripple"></span>

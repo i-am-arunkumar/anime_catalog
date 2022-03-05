@@ -3,10 +3,9 @@
 	import Home from "./Pages/HomePage/Homepage.svelte";
 	import DetailPage from "./Pages/DetailPage/DetailPage.svelte";
 	import { Router, Route } from "svelte-routing";
-	export let url = "/";
 </script>
 
-<Router {url}>
+<Router url="/">
 	<Header />
 	<div class="topbar-spacer" />
 	<Route path="/" component={Home} />
