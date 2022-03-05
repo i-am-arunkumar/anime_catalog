@@ -54,6 +54,7 @@
 
     .card{
         overflow: hidden;
+        background-color: #fefefe;
     }
   
     .card:focus span#ripple{

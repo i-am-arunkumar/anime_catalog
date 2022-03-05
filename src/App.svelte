@@ -6,14 +6,6 @@
 	export let url = "/";
 </script>
 
-<svelte:head>
-	<style>
-		body{
-			background-color: #e0e0e0;
-		}
-	</style>
-</svelte:head>
-
 <Router {url}>
 	<Header />
 	<div class="topbar-spacer" />

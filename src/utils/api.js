@@ -6,6 +6,35 @@ const credentials = {
 
 const baseUrl = "https://api.jikan.moe/v4/"
 
-export async function getTopAnimes() {
-    return fetch(`${baseUrl}top/anime`).then(e=>e.json())
+async function url(endpoint) {
+    return fetch(`${baseUrl}${endpoint}`).then(e => e.json())
 }
+
+export async function getLatestAnimes() {
+    return url("anime?order_by=start_date&sort=asc")
+}
+
+export async function getTopAnimes() {
+    return url("top/anime")
+}
+
+
+export async function getRandomAnimes() {
+    return url("random/anime")
+}
+
+export async function getRecommendedAnimes() {
+    return url("recommendations/anime")
+}
+
+export async function searchAnime(params) {
+    let { q, genre, status } = params
+    let base = "anime?"
+    Object.entries(params).forEach(([key,val],i) => {
+        base +=  (key + "=" + val + "&")
+    })
+    return url(base)
+}
+
+
+
