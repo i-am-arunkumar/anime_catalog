@@ -1,210 +1,162 @@
 <script>
-    import Transition from "../../SharedComponents/Transition.svelte";
-    import { onMount } from "svelte";
-    import { selectedAnime as data } from "../../store/anime";
-    onMount(() => window.scrollTo(0,0))
+import Episodes from './Episodes.svelte';
+import Transition from "../../SharedComponents/Transition.svelte";
+import { onMount } from "svelte";
+import Reviews from "./Reviews.svelte";
+import Details from "./Details.svelte";
+import Recommendations from "./Recommendations.svelte";
+import { selectedAnime as data } from "../../store/anime";
+  
 
-    function getImage() {
-      return $data.images && $data.images.webp.large_image_url
-    }
+  function getImage() {
+    return $data.images && $data.images.webp.large_image_url;
+  }
+    
+  onMount(() => window.scrollTo(0, 0));
 
+  let tabs = ["Details", "Episodes", "Reviews", "Recommendations"];
+  let selected_index = 0;
+
+  function selectTab(i) {
+    selected_index = i;
+  }
 </script>
 
 <Transition>
-{#if $data}
-<div>
+ {#if $data !== null}
+ <div>
   <div class="p-3  has-background-light">
-      <div class="title">{$data.title_japanese}</div>
-      <div class="subtitle">{$data.title_english}</div>
+    <div class="title">{$data.title_japanese}</div>
+    <div class="subtitle">{$data.title_english}</div>
   </div>
-      <div class="columns ">
-          <div class="column mt-4 is-one-third">
-              <div class="parallax">
-                  <div class="parallax-top-left" tabindex="1"></div>
-                  <div class="parallax-top-right" tabindex="2"></div>
-                  <div class="parallax-bottom-left" tabindex="3"></div>
-                  <div class="parallax-bottom-right" tabindex="4"></div>
-                  <div class="parallax-content">
-                    <div class="parallax-front">
-                      <div class="title" style="color:white" >{$data.title}</div>
-                    </div>
-                    <div class="parallax-back">
-                      <img src={getImage()} class="picture img-responsive rounded" />
-                    </div>
-                  </div>
-                </div>
-                <article class="panel mt-6 is-text-center">
-                  <p class="panel-heading has-text-white	 is-primary">
-                    Information
-                  </p>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Type: </h1>
-                      <p class="subtitle is-6">{$data.type}</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Episodes: </h1>
-                      <p class="subtitle is-6">{$data.episodes}</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Status: </h1>
-                      <p class="subtitle is-6">{$data.status}</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Licensors: </h1>
-                      <p class="subtitle is-6">Funimation</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Studios: </h1>
-                      <p class="subtitle is-6">Wit Studio</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Source: </h1>
-                      <p class="subtitle is-6">Manga</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Genres: </h1>
-                      <p class="subtitle is-6">Action, Drama, Fantasy, Mystery</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Themes: </h1>
-                      <p class="subtitle is-6">Military, Super Power</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Demographic: </h1>
-                      <p class="subtitle is-6">Shounen</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Duration: </h1>
-                      <p class="subtitle is-6">24 min. per ep.</p>
-                  </div>
-                  <div class="panel-block is-active">
-                      <h1 class="title is-6 mr-2">Rating: </h1>
-                      <p class="subtitle is-6">R - 17+ (violence & profanity)</p>
-                  </div>
-                  
-  
-                </article> 
+  <div class="columns ">
+    <div class="column mt-4 is-one-third">
+      <div class="parallax">
+        <div class="parallax-top-left" tabindex="1" />
+        <div class="parallax-top-right" tabindex="2" />
+        <div class="parallax-bottom-left" tabindex="3" />
+        <div class="parallax-bottom-right" tabindex="4" />
+        <div class="parallax-content">
+          <div class="parallax-front">
+            <div class="title" style="color:white">{$data.title}</div>
           </div>
-          <div class="column mt-4 left-container">
-              <div class="tabs is-boxed">
-                  <ul>
-                    <li class="is-active">
-                      <a>
-                        <span class="icon is-small"><i class="fas fa-Details" aria-hidden="true"></i></span>
-                        <span>Details</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="icon is-small"><i class="fas fa-Epidsodes" aria-hidden="true"></i></span>
-                        <span>Episodes</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="icon is-small"><i class="fas fa-Recommendations" aria-hidden="true"></i></span>
-                        <span>Recommendations</span>
-                      </a>
-                    </li>  
-                  </ul>
-              </div>
-                  <div class="card mx-6">
-                      <footer class="card-footer">
-                      <div class="card-footer-item item">
-                          <h1 class="subtitle is-6">Score</h1>
-                          <h2 class="title is-4">{$data.score}</h2>
-  
-                      </div>
-                      <div class="card-footer-item item">
-                          <h1 class="subtitle is-6">Ranked</h1>
-                          <h2 class="title is-4">#{$data.rank}</h2>
-                          </div>
-                          <div class="card-footer-item item">
-                              <h1 class="subtitle is-6">Popularity</h1>
-                          <h2 class="title is-4">#{$data.popularity}</h2>
-                          </div>
-                      </footer>
-                  </div>  
-                  <div class="my-6 container">
-                      <button class="button is-dark">
-                          <span class="icon">
-                              <i class="gg-add-r"></i>
-                          </span>
-                          <span>Add to Wishlist</span>
-                      </button>
-                 </div>    
-                 <div class="container">
-                  <h1 class="title is-4">Synopsis</h1>
-                  <p>{$data.synopsis}</p>
-               </div>  
-               <div class="card">
-                  <h1 class="title is-4">Review</h1>
-                  <div class="card-content">
-                    <div class="media">
-                      <div class="media-left">
-                        <figure class="image is-48x48">
-                          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                        </figure>
-                      </div>
-                      <div class="media-content">
-                        <p class="title is-4">John Smith</p>
-                        <p >@johnsmith</p>
-                      </div>
-                    </div>
-                
-                    <div class="content">
-                      Oh dear Shingeki no Kyojin, where do I even begin. If you've talked with your friends about anime, 
-                      then the couple anime that everyone talks about are Naruto, Bleach, One Piece, Dragon Ball, and... Shingeki no Kyojin. 
-                      What's the difference between Shingeki and the rest? Shingeki only has 25 episodes so far yet it's on par in popularity with the other super long, Americanized anime. 
-                      Why is it popular? Well that's simply because it's stunningly amazing. Those people that call Shingeki no Kyojin "overrated" may not have the same taste as me, and that's perfectly fine, but in my honest opinion, Shingeki no Kyojin is one of if not the greatest anime to be made. 
-                      It's not popular for no reason. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a>
-                      <br>
-                      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                    <p class="card-footer-item">
-                      <span>
-                        Share on <a href="#">Facebook</a>
-                      </span>
-                    </p>
-                  </div>
-              </div>
-                
-          </div>   
+          <div class="parallax-back">
+            <img src={getImage()} class="picture img-responsive rounded" />
+          </div>
+        </div>
       </div>
+      <article class="panel mt-6 is-text-center">
+        <p class="panel-heading has-text-white	 is-primary">Information</p>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Type:</h1>
+          <p class="subtitle is-6">{$data.type}</p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Episodes:</h1>
+          <p class="subtitle is-6">{$data.episodes}</p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Producers:</h1>
+          <p  class="producer subtitle is-6">
+            {$data.producers.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Status:</h1>
+          <p class="subtitle is-6">{$data.status}</p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Licensors:</h1>
+          <p class="subtitle is-6">
+            {$data.licensors.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Studios:</h1>
+          <p class="subtitle is-6">
+            {$data.studios.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Source:</h1>
+          <p class="subtitle is-6">{$data.source}</p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Genres:</h1>
+          <p class="subtitle is-6">
+            {$data.genres.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Themes:</h1>
+          <p class="subtitle is-6">
+            {$data.themes.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Demographic:</h1>
+          <p class="subtitle is-6">
+            {$data.demographics.map((s) => s.name).join(", ")}
+          </p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Duration:</h1>
+          <p class="subtitle is-6">{$data.duration}</p>
+        </div>
+        <div class="panel-block is-active">
+          <h1 class="title is-6 mr-2">Rating:</h1>
+          <p class="subtitle is-6">{$data.rating}</p>
+        </div>
+      </article>
+    </div>
+    <div class="column mt-4 left-container">
+      <div class="tabs is-boxed">
+        <ul>
+          {#each tabs as tab, i}
+            <li class={i === selected_index ? "is-active" : ""}>
+              <a on:click={() => selectTab(i)}>
+                <span class="icon is-small">
+                  <i class="fas fa-Details" aria-hidden="true"/>
+                </span>
+                <span>{tab}</span>
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </div>
+
+      {#if selected_index === 0}
+        <Details/>
+      {:else if selected_index === 1}
+        <Episodes/>
+      {:else if selected_index === 2}
+        <Reviews/>
+      {:else if selected_index === 3}
+        <Recommendations/>
+      {/if}
+    </div>
   </div>
+</div>
 {:else}
-<progress class="progress is-small is-primary" max="100">15%</progress>
-{/if}
-    
+  <progress class="progress is-small is-primary" max="100">15%</progress>
+ {/if}
 </Transition>
+
 <style>
-    .item{
-        flex-direction : column;
-    }
-
-
-    .left-container{
-      background-color: #fff;
-    }
-    .container{
-        margin: 16px;
-    }
-    .card{
-        margin: 18px;
-        font-size:16px;
-    }
-
-    .picture{
-        width: 100%;
-        border-radius:8px;
-
-    }
-    .content{
-        font-size: 12px;
-    }
-
-    .main{
-        display: flex;
-    }
+  .left-container {
+    background-color: #fff;
+  }
+  .picture {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .producer{
+      display: -webkit-box;
+        max-height: 80%;
+        max-width: 300px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+  }
 </style>
