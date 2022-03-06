@@ -5,7 +5,6 @@
   import {
     setFilter,
     randomAnime,
-    getCurrentFilter,
   } from "../utils/filter_utils";
   import { current_filter } from "../store/anime";
   import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -69,17 +68,6 @@
       </a>
       <a class="navbar-item is-clickable " id="random" on:click={randomAnime}>
         Random Anime
-      </a>
-      <a
-        class={"navbar-item is-clickable" +
-          ("recommendations" === $current_filter.id && "is-active")}
-        id="recommendation"
-        href="/recommendations"
-        on:click={() =>
-          current_filter.set({ id: "recommendations", params: null })}
-        use:link
-      >
-        Recommendations
       </a>
     </div>
 

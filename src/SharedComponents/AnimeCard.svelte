@@ -29,7 +29,7 @@
             </figure>
         </div>
         <div class="p-4 card-content has-text-left">
-            <p class=" mb-2 title is-5">{data.title}</p>
+            <p class=" mb-2 title is-6 ">{data.title}</p>
             <p class="is-size-6">{data.episodes ? (data.type === "movie" || data.episodes === 1 ? "Movie" :`${data.episodes} episodes`) : "Ongoing"}</p>
         </div>
         <div class="card-footer level m-0">
@@ -47,6 +47,10 @@
 </div>
 
 <style>
+
+    .title{
+        min-height: 54px;
+    }
 
     img{
         background-color: aliceblue;

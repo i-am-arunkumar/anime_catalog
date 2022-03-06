@@ -29,8 +29,8 @@
             <button disabled={$currentPage === $pagination.last_visible_page} class={`pagination-next ${$currentPage === $pagination.last_visible_page && " is-disabled " }`} on:click={nextPage}>Next page</button>
             <ul class="pagination-list">
                 {#if $currentPage > 4}  
-                    <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-                    <li><a class="pagination-link" aria-label="Goto page 1">2</a></li>
+                    <li><a on:click={() => gotoPage(1)} class="pagination-link" aria-label="Goto page 1">1</a></li>
+                    <li><a on:click={() => gotoPage(2)} class="pagination-link" aria-label="Goto page 1">2</a></li>
                     <li><span class="pagination-ellipsis">&hellip;</span></li>
                 {/if}
                 
@@ -38,7 +38,7 @@
                     <li><a on:click={() => gotoPage(i)} class={`pagination-link ${$currentPage === i && "is-current"} `} aria-label="Goto page">{i}</a></li>
                 {/each}
                 <li><span class="pagination-ellipsis">&hellip;</span></li>
-                <li><a class={`pagination-link ${$currentPage === $pagination.last_visible_page && "is-current"} `} aria-label="Goto page">{$pagination.last_visible_page}</a></li>
+                <li><a on:click={() => gotoPage($pagination.last_visible_page)} class={`pagination-link ${$currentPage === $pagination.last_visible_page && "is-current"} `} aria-label="Goto page">{$pagination.last_visible_page}</a></li>
             </ul>
         </nav>
     {/if}       

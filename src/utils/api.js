@@ -31,7 +31,7 @@ export async function getRandomAnimes() {
     return url("random/anime")
 }
 
-export async function getRecommendedAnimes() {
+export async function getRecommendedAnimes(id) {
     return url("recommendations/anime")
 }
 
