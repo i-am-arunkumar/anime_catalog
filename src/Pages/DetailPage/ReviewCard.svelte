@@ -20,11 +20,24 @@
         <time datetime="2016-1-1">{ dt.toLocaleDateString() + " " + dt.toLocaleTimeString()}</time>
     </div>
     </div>
-
+<!-- 
     <div class={`content ${showMore ? "" : "show-less"}`}>
       {data.review}
+    
+      <tp-yt-paper-button id="more" aria-expanded="false" noink="" class="style-scope ytd-expander" role="button" tabindex="0" animated="" elevation="0" aria-disabled="false">
+        
+        <yt-formatted-string class="more-button style-scope ytd-video-secondary-info-renderer" slot="more-button" role="button">
+          Show more
+        </yt-formatted-string>
+      <paper-ripple class="style-scope tp-yt-paper-button">
+          
+      
+          <div id="background" class="style-scope paper-ripple"></div>
+          <div id="waves" class="style-scope paper-ripple"></div>
+      </paper-ripple></tp-yt-paper-button>
+
       <br />
-    </div>
+    </div> -->
     <div class="card-footer-item ">
       <div class="level" style="width: 100%;">
         <div class="level-left">
