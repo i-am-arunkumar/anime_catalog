@@ -1,7 +1,6 @@
 <script>
 	import Header from "./SharedComponents/Header.svelte";
 	import Home from "./Pages/HomePage/Homepage.svelte";
-	import Recommendation from "./Pages/Recommendations/Recommendation.svelte";
 	import DetailPage from "./Pages/DetailPage/DetailPage.svelte";
 	import { Router, Route } from "svelte-routing";
 </script>
@@ -10,7 +9,6 @@
 	<Header />
 	<div class="topbar-spacer" />
 	<Route path="/" component={Home} />
-	<Route path="/recommendations" component={Recommendation} />
 	<Route path="/details" component={DetailPage} />
 	<Route path="/details/:id" let:params>
 		<DetailPage id={params.id} ></DetailPage>
