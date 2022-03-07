@@ -18,9 +18,8 @@ export function getCurrentFilter() {
 
 export async function randomAnime() {
     navigate("/details")
-    selectedAnime.set(null)
     return getRandomAnimes().then(data => {
-        selectedAnime.set(data.data)
+        navigate(`/details/${data.data.mal_id}`, { replace: true, data: data.data })
     })
 }
 

@@ -32,7 +32,7 @@ export async function getRandomAnimes() {
 }
 
 export async function getRecommendedAnimes(id) {
-    return url("recommendations/anime")
+    return url(`anime/${id}/recommendations`)
 }
 
 export async function getPopularAnimes() {

@@ -1,25 +1,40 @@
-<!-- <script>
-    import { selectedAnime as data } from "../../store/anime";
-    import { getEpisodes } from "../../utils/api";
-    let episodes_title = data.episodes.title;
-    let episodes_nos = data.episodes.episode;
+<script>
+	import { onMount } from 'svelte';
+  import { getEpisodes } from "../../utils/api";
 
+  export let id
+  let episodes
+  onMount(() => {
+    getEpisodes(id).then(d => {
+      episodes = d.data
+    })
+  })
 
 </script>
-
 <div>
-  <table class="table">
+  {#if episodes}
+
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
       <tr>
-        <th>Episodes nos.</th>
+        <th>Episodes no.</th>
         <th>Episodes Name</th>
+        <th>Aired date</th>
+        <th>filler</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>{episodes_nos}</th>
-        <th>{episodes_title}</th>
-      </tr>
+        {#each episodes as  episode}
+        <tr>
+          <td>{episode.mal_id}</td>
+          <td>{episode.title}</td>
+          <td>{new Date(episode.aired).toLocaleDateString()}</td>
+          <td>{episode.filler ? "Yes" : "No"}</td>
+        </tr>
+        {/each} 
     </tbody>
   </table>  
-</div> -->
+  {:else}
+        <progress class="progress is-small is-primary" max="100">15%</progress>
+  {/if}
+</div> 

@@ -1,26 +1,24 @@
 <script>
   import Episodes from "./Episodes.svelte";
   import Transition from "../../SharedComponents/Transition.svelte";
-  import { onMount } from "svelte";
+  import { afterUpdate } from "svelte";
   import Reviews from "./Reviews.svelte";
   import Details from "./Details.svelte";
   import Recommendations from "./Recommendations.svelte";
-  import { selectedAnime as data } from "../../store/anime";
+//  import { selectedAnime as datat } from "../../store/anime";
   import { getAnimeById } from "../../utils/api";
 
   export let id;
+  export let data;
 
-  function getImage() {
-    return $data.images && $data.images.webp.large_image_url;
+  $: if (id && !data) {
+    getAnimeById(id).then((e) => {
+      data = e.data;
+    });
   }
 
-  onMount(() => {
+  afterUpdate(() => {
     window.scrollTo(0, 0);
-    if (id) {
-      getAnimeById(id).then((e) => {
-        data.set(e.data);
-      });
-    }
   });
 
   let tabs = ["Details", "Episodes", "Reviews", "Recommendations"];
@@ -32,11 +30,11 @@
 </script>
 
 <Transition>
-  {#if $data !== null}
+  {#if data}
     <div>
       <div class="p-3  has-background-light">
-        <div class="title">{$data.title}</div>
-        <div class="subtitle">{$data.title_japanese || ""}</div>
+        <div class="title">{data.title}</div>
+        <div class="subtitle">{data.title_japanese || ""}</div>
       </div>
       <div class="columns ">
         <div class="column mt-4 is-one-third">
@@ -48,11 +46,11 @@
             <div class="parallax-content">
               <div class="parallax-front">
                 <div class="title" style="color:white">
-                  {$data.title_english || $data.title}
+                  {data.title_english || data.title}
                 </div>
               </div>
               <div class="parallax-back">
-                <img src={getImage()} class="picture img-responsive rounded" />
+                <img src={data.images && data.images.webp.large_image_url} class="picture img-responsive rounded" />
               </div>
             </div>
           </div>
@@ -60,63 +58,63 @@
             <p class="panel-heading has-text-white	 is-primary">Information</p>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Type:</h1>
-              <p class="subtitle is-6 m-0">{$data.type}</p>
+              <p class="subtitle is-6 m-0">{data.type}</p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Episodes:</h1>
-              <p class="subtitle is-6 m-0">{$data.episodes}</p>
+              <p class="subtitle is-6 m-0">{data.episodes}</p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Producers:</h1>
               <p class="producer subtitle m-0 is-6">
-                {$data.producers.map((s) => s.name).join(", ")}
+                {data.producers.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Status:</h1>
-              <p class="subtitle m-0 is-6">{$data.status}</p>
+              <p class="subtitle m-0 is-6">{data.status}</p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Licensors:</h1>
               <p class="subtitle m-0 is-6">
-                {$data.licensors.map((s) => s.name).join(", ")}
+                {data.licensors.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Studios:</h1>
               <p class="subtitle m-0 is-6">
-                {$data.studios.map((s) => s.name).join(", ")}
+                {data.studios.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Source:</h1>
-              <p class="subtitle m-0 is-6">{$data.source}</p>
+              <p class="subtitle m-0 is-6">{data.source}</p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Genres:</h1>
               <p class="subtitle m-0 is-6">
-                {$data.genres.map((s) => s.name).join(", ")}
+                {data.genres.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Themes:</h1>
               <p class="subtitle m-0 is-6">
-                {$data.themes.map((s) => s.name).join(", ")}
+                {data.themes.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Demographic:</h1>
               <p class="subtitle m-0 is-6">
-                {$data.demographics.map((s) => s.name).join(", ")}
+                {data.demographics.map((s) => s.name).join(", ")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Duration:</h1>
-              <p class="subtitle  m-0 is-6">{$data.duration}</p>
+              <p class="subtitle  m-0 is-6">{data.duration}</p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Rating:</h1>
-              <p class="subtitle m-0 is-6">{$data.rating}</p>
+              <p class="subtitle m-0 is-6">{data.rating}</p>
             </div>
           </article>
         </div>
@@ -134,13 +132,13 @@
           </div>
 
           {#if selected_index === 0}
-            <Details data={$data} />
+            <Details {data} />
           {:else if selected_index === 1}
-            <Episodes />
+            <Episodes id={data.mal_id} />
           {:else if selected_index === 2}
-            <Reviews id={$data.mal_id} />
+            <Reviews id={data.mal_id} />
           {:else if selected_index === 3}
-            <Recommendations />
+            <Recommendations id={data.mal_id} />
           {/if}
         </div>
       </div>

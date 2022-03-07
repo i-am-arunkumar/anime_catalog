@@ -10,8 +10,8 @@
 	<div class="topbar-spacer" />
 	<Route path="/" component={Home} />
 	<Route path="/details" component={DetailPage} />
-	<Route path="/details/:id" let:params>
-		<DetailPage id={params.id} ></DetailPage>
+	<Route path="/details/:id" let:params let:location>
+		<DetailPage id={params.id} data={location.state.data} ></DetailPage>
 	</Route>
 
 </Router>

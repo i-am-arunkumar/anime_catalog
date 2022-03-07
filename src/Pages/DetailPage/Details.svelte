@@ -1,6 +1,5 @@
 <script>
   export let data;
-  let utubelink = data.trailer.embed_url;
 </script>
 
 <div class="card mx-6">
@@ -30,7 +29,7 @@
 <div class="container">
   <h1 class="title is-4">Synopsis</h1>
   <p>{data.synopsis}</p>
-  {#if utubelink}
+  {#if data.trailer.embed_url}
     <div class="video mx-2">
       <h1 class="title is-4">Official Trailer</h1>
       <div class="player video-promotion">
@@ -40,7 +39,7 @@
             type="text/html"
             width="640"
             height="390"
-            src={utubelink}
+            src={data.trailer.embed_url}
             frameborder="0"
           />
         </a>

@@ -1,7 +1,7 @@
 <script>
   export let data;
   let dt = new Date(data.date)
-  let showMore = false
+  let showMore = false   
 </script>
 
 <div class="card m-4">
@@ -20,24 +20,11 @@
         <time datetime="2016-1-1">{ dt.toLocaleDateString() + " " + dt.toLocaleTimeString()}</time>
     </div>
     </div>
-<!-- 
+ 
     <div class={`content ${showMore ? "" : "show-less"}`}>
       {data.review}
-    
-      <tp-yt-paper-button id="more" aria-expanded="false" noink="" class="style-scope ytd-expander" role="button" tabindex="0" animated="" elevation="0" aria-disabled="false">
-        
-        <yt-formatted-string class="more-button style-scope ytd-video-secondary-info-renderer" slot="more-button" role="button">
-          Show more
-        </yt-formatted-string>
-      <paper-ripple class="style-scope tp-yt-paper-button">
-          
       
-          <div id="background" class="style-scope paper-ripple"></div>
-          <div id="waves" class="style-scope paper-ripple"></div>
-      </paper-ripple></tp-yt-paper-button>
-
-      <br />
-    </div> -->
+    </div> 
     <div class="card-footer-item ">
       <div class="level" style="width: 100%;">
         <div class="level-left">
@@ -57,12 +44,12 @@
 
 
 <style>
-    .show-less{
+     .show-less{
         display: -webkit-box;
         -webkit-line-clamp: 5;
         max-height: 150px;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
+    } 
 </style>

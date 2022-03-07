@@ -6,11 +6,13 @@
   import Review from "./ReviewCard.svelte";
   export let id;
   let reviews
-  onMount(()=>{
+  
+  $: if (id){
     getReview(id).then(d => {
       reviews=d.data
     })
-  })
+  }
+
 </script>
 <div class="container" > 
   {#if reviews}
