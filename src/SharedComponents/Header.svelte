@@ -26,7 +26,7 @@
 
 <!-- svelte-ignore a11y-no-redundant-roles -->
 <nav
-  style="border-radius: 8px;"
+  style="border-radius: 8px;z-index: 100000;"
   class="navbar is-primary is-fixed-top m-2"
   role="navigation"
   aria-label="main navigation"

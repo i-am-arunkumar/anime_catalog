@@ -5,7 +5,6 @@
   import Reviews from "./Reviews.svelte";
   import Details from "./Details.svelte";
   import Recommendations from "./Recommendations.svelte";
-//  import { selectedAnime as datat } from "../../store/anime";
   import { getAnimeById } from "../../utils/api";
 
   export let id;

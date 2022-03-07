@@ -23,8 +23,12 @@
  
     <div class={`content ${showMore ? "" : "show-less"}`}>
       {data.review}
-      
     </div> 
+    <button class="button is-text" on:click={()=>{
+      showMore = !showMore 
+    }}>
+      {showMore ? "show less": "show more"}
+    </button>
     <div class="card-footer-item ">
       <div class="level" style="width: 100%;">
         <div class="level-left">
