@@ -10,7 +10,13 @@ const auth = getAuth();
 function addwatchList(e){
   const user = auth.currentUser;
   if (user) {
-    updateWatchlist(user.uid,data)
+    updateWatchlist(user.uid,data).then(() => {
+alert("Added to watchlist!!")  
+}).catch((error) => {
+  const errorCode = error.code;
+    console.log(errorCode);
+});
+
   }
   else{
     confirm("Please log in to add watchlist!!")
