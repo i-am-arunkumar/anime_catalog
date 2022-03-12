@@ -1,5 +1,22 @@
 <script>
   export let data;
+
+import { getAuth } from "firebase/auth";
+import { updateWatchlist } from "../../utils/database";
+
+const auth = getAuth();
+
+
+function addwatchList(e){
+  const user = auth.currentUser;
+  if (user) {
+    updateWatchlist(user.uid,data)
+  }
+  else{
+    confirm("Please log in to add watchlist!!")
+  }
+}
+
 </script>
 
 <div class="card mx-6">
@@ -19,11 +36,11 @@
   </footer>
 </div>
 <div class="my-6 container">
-  <button class="button is-dark">
+  <button class="button is-dark" on:click={addwatchList}>
     <span class="icon">
       <i class="gg-add-r" />
     </span>
-    <span>Add to Wishlist</span>
+    <span>Add to Watchlist</span>
   </button>
 </div>
 <div class="container">

@@ -2,12 +2,20 @@
   import { Link, link } from "svelte-routing";
   import SignInButton from "../Pages/Authentication/Signin.svelte";
   import LogInButton from "../Pages/Authentication/Login.svelte";
+  import Profile from "../Pages/Profile/Profile.svelte"
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
+let user = auth.currentUser;
+onAuthStateChanged(auth, (u) => (user = u));
+
+
   import {
     setFilter,
     randomAnime,
   } from "../utils/filter_utils";
   import { current_filter } from "../store/anime";
-  import { getAuth, onAuthStateChanged } from "firebase/auth";
 
   function navigate_filter(e) {
     if (e.target.id) setFilter(e.target.id);
@@ -15,13 +23,6 @@
 
   $: location.pathname;
 
-  const auth = getAuth();
-  let user = auth.currentUser;
-  onAuthStateChanged(auth, (u) => (user = u));
-
-  function signout(e) {
-    if (confirm("Are you sure you want to log out!") == true) auth.signOut();
-  }
 </script>
 
 <!-- svelte-ignore a11y-no-redundant-roles -->
@@ -78,9 +79,7 @@
             <SignInButton />
             <LogInButton />
           {:else}
-            <button on:click={signout} class="button is-light">
-              <strong>Log out</strong>
-            </button>
+          <Profile/>
           {/if}
         </div>
       </div>

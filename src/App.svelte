@@ -3,12 +3,14 @@
 	import Home from "./Pages/HomePage/Homepage.svelte";
 	import DetailPage from "./Pages/DetailPage/DetailPage.svelte";
 	import { Router, Route } from "svelte-routing";
+	import Watchlist from "./Pages/Watchlist/Watchlist.svelte";
 </script>
 
 <Router url="/">
 	<Header />
 	<div class="topbar-spacer" />
 	<Route path="/" component={Home} />
+	<Route path="/watchlist" component={Watchlist} />
 	<Route path="/details" component={DetailPage} />
 	<Route path="/details/:id" let:params let:location>
 		<DetailPage id={params.id} data={location.state.data} ></DetailPage>

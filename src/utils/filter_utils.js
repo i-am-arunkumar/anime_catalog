@@ -30,7 +30,9 @@ export function setFilter(filter, params, start_from_begining = true) {
     if (location.pathname !== "/") navigate("/")
     animeList.set(null)
     current_filter.set({ id: filter, params: params })
+    console.log(params);
     filter_fetch[filter](params).then(res => {
+        console.log(res);
         pagination.set(res.pagination)
         animeList.set(res.data)
     })
