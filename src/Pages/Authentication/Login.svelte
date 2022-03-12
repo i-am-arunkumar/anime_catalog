@@ -2,7 +2,7 @@
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
   import { fly } from 'svelte/transition';
 
-  let signInModel;
+  let logInModal=false;
 
   let email;
   let pass;
@@ -10,6 +10,7 @@
 
   let variable = "";
   let variable2 = "";
+  let variable3="";
 
 
   function Login(e) {
@@ -29,15 +30,19 @@
         if (errorCode == "auth/invalid-email") {
           variable = "This email is invalid";
           variable2 = "";
+          variable3 = "";
         } else if (errorCode == "auth/wrong-password") {
           variable = "";
           variable2 = "wrong password";
+          variable3 = "";
         } else if (errorCode == "auth/user-not-found") {
           variable = "Account not exist";
+          variable3 = "";
           variable2 = "";
         } else if (errorCode == "auth/too-many-requests") {
           variable = "";
-          variable2 = "too-many-requests";
+          variable3 = "too-many-requests";
+          variable2 = "";
         } else {
           variable = "";
           variable2 = "";
@@ -46,8 +51,17 @@
       });
   }
 
+
+  function clearall(){
+variable=""
+variable2=""
+variable3=""
+}
+
   function toggleLogin(e) {
-    signInModel.classList.toggle("is-active");
+    // logInModal.classList.toggle("is-active");
+    logInModal=!logInModal;
+    clearall();
   }
 </script>
 
@@ -55,10 +69,13 @@
   <strong>Log in</strong>
 </button>
 
-<div class="modal" bind:this={signInModel} in:fly="{{ y: -50, duration: 250, delay: 300 }}"
-out:fly="{{ y: -50, duration: 250 }}" >
+{#if logInModal===true}
+
+<div class="modal is-active">
+<!-- bind:this={logInModal} -->
   <div class="modal-background" on:click={toggleLogin} />
-  <div class="modal-card">
+  <div class="modal-card" transition:fly="{{ y: 200, duration: 250 }}">
+    <!-- in:fly="{{ y: -50, duration: 250, delay: 300 }}" out:fly="{{ y: -50, duration: 250 }}" -->
     <header class="modal-card-head">
       <p class="modal-card-title">Log in</p>
       <button on:click={toggleLogin} class="delete" aria-label="close" />
@@ -69,7 +86,7 @@ out:fly="{{ y: -50, duration: 250 }}" >
         <label class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
           <input
-            class="input is-danger"
+            class={`input ${variable ? "is-danger" : ''}`}
             type="email"
             placeholder="Email input"
             value=""
@@ -89,7 +106,7 @@ out:fly="{{ y: -50, duration: 250 }}" >
         <label class="label">Password</label>
         <p class="control has-icons-left">
           <input
-            class="input"
+            class={`input ${variable2 ? "is-danger" : ''}`}
             type="password"
             placeholder="Password"
             bind:this={pass}
@@ -108,3 +125,5 @@ out:fly="{{ y: -50, duration: 250 }}" >
     </footer>
   </div>
 </div>
+
+{/if}

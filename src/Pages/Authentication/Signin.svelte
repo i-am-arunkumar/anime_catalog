@@ -5,7 +5,7 @@
 
 import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-
+import { fly } from 'svelte/transition';
 
 
 let name;
@@ -14,8 +14,26 @@ let pass;
 let email;
 let einvalid;
 let pinvalid;
+let uninvalid;
+let ninvalid;
+
 
 function Register(e){
+  console.log(pass.value);
+  if(name.value=="" ){
+    ninvalid=true;
+    return
+  }
+  if(uname.value=="" ){
+    uninvalid=true;
+    return
+  }
+  if(pass.value=="" ){
+    pinvalid=true;
+    return
+  }
+
+
 createUserWithEmailAndPassword(auth, email.value, pass.value)
   .then((userCredential) => {
     // Signed in 
@@ -47,7 +65,14 @@ else if(errorCode == "auth/weak-password"){
     einvalid = false;
     pinvalid = true;
   }
-else{
+else if(errorCode== "auth/network-request-failed"){
+    alert("Check your network connection!!!")
+  }
+else{ 
+einvalid=false;
+pinvalid=false;
+uninvalid=false;
+ninvalid=false;
   console.log(errorCode);
 }
     const errorMessage = error.message;
@@ -62,13 +87,20 @@ else{
 }
 
 
+function clearall(){
+einvalid="";
+pinvalid="";
+uninvalid="";
+ninvalid="";
+}
 
 
-
-  let signInModel;
+  let signInModel=false;
 
   function toggleSignin(e) {
-    signInModel.classList.toggle('is-active');
+    // signInModel.classList.toggle('is-active');
+    signInModel=!signInModel;
+    clearall();
   }
 
 
@@ -82,10 +114,13 @@ else{
 </button>
 
 
-<div class="modal" bind:this={signInModel} >
+{#if signInModel===true}
+
+<div class="modal is-active">
+  <!-- bind:this={signInModel} > -->
   <div class="modal-background" on:click={toggleSignin} ></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
+  <div class="modal-card" transition:fly="{{ y: 200, duration: 250 }}">
+    <header class="modal-card-head" >
       <p class="modal-card-title">Sign up</p>
       <button  on:click={toggleSignin} class="delete" aria-label="close"></button>
     </header>
@@ -94,15 +129,16 @@ else{
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <label class="label" > Name</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Text input" bind:this={name}>
+          <input class={`input ${ninvalid ? "is-danger" : ''}`} type="text" placeholder="Text input" bind:this={name}>
         </div>
+        <p class={`help ${ninvalid ? "is-danger" : ''}`}>Name cannot be empty</p>
       </div>
       
       <div class="field">
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-success" type="text" placeholder="Text input" value="" bind:this={uname}>
+          <input class={`input ${uninvalid ? "is-danger" : ''}`} type="text" placeholder="Text input" value="" bind:this={uname}>
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -110,7 +146,7 @@ else{
             <i class="fas fa-check"></i>
           </span>
         </div>
-        <!-- <p class="help is-success">This username is available</p> -->
+        <p class={`help ${uninvalid ? "is-danger" : ''}`}>Username cannot be empty</p>
       </div>
       
 
@@ -155,3 +191,4 @@ else{
   </div>
 </div>
 
+{/if}
