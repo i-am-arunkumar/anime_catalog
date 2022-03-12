@@ -7,7 +7,7 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const auth = getAuth();
-let user = auth.currentUser;
+let user;
 onAuthStateChanged(auth, (u) => (user = u));
 
 
@@ -75,9 +75,12 @@ onAuthStateChanged(auth, (u) => (user = u));
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          {#if !user}
-            <SignInButton />
-            <LogInButton />
+  
+          {#if user===undefined}         
+          <div></div>        
+          {:else if !user}    
+          <SignInButton />
+          <LogInButton />  
           {:else}
           <Profile/>
           {/if}
