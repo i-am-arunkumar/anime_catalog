@@ -4,12 +4,14 @@
 	import { getWatchListData } from "../../utils/database";
 	import { getAuth } from "firebase/auth";
 	import { onMount } from "svelte";
+	import {currentPage } from "../../store/anime";
 
 	const auth = getAuth();
 	let userdata = []
 
 	onMount(() => {
 		const user = auth.currentUser;
+		currentPage.set(1);
 		getWatchListData(user.uid).then((d) => {
 			userdata = Object.values(d).map((a, i) => ({
 				...a,

@@ -23,7 +23,7 @@
             <progress class="progress is-small is-primary" max="100">15%</progress>
         {/if}
     </div>
-    {#if animeList && animeList.length !== 0 && $pagination}
+    {#if animeList && animeList.length !== 0 && (animeList.length >=24 || $currentPage!==1) && $pagination}
         <nav class="pagination is-right my-4" role="navigation" aria-label="pagination">
             <button  on:click={prevPage} disabled={$currentPage === 1} class={`pagination-previous ${$currentPage === 1 && " is-disabled " }`}>Previous</button>
             <button disabled={$currentPage === $pagination.last_visible_page} class={`pagination-next ${$currentPage === $pagination.last_visible_page && " is-disabled " }`} on:click={nextPage}>Next page</button>
