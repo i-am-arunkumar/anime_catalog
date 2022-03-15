@@ -22,8 +22,6 @@
             genreq.push(genreList[Math.floor(Math.random() * genreList.length)])
         })
 
-        
-
         searchAnime({
             q: "",
             sort : 'desc',
@@ -43,7 +41,7 @@
                 <RecommendationCard data={rec} />
             </div>
         {:else}
-            <div class="title">No Recommendations for this Anime</div>
+            <div class="title mx-4">No Recommendations for this Anime</div>
         {/each}
     {:else}
         <progress class="progress is-small is-primary" max="100">15%</progress>

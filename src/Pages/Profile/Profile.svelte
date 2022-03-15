@@ -42,26 +42,36 @@ import {  link } from "svelte-routing";
 <div class="dropdown is-right" bind:this={dropDown}>
   <div class="dropdown-trigger">
     <button
-      class="button"
+      class="button is-text  btn-icon"
       aria-haspopup="true"
       aria-controls="dropdown-menu"
       use:clickOutside
       on:outclick={close}
       on:click={toggleDropDown}
     >
-      <span>Profile</span>
-      <span class="icon is-small">
-        <i class="gg-chevron-down-o" />
+      <span class="icon is-small profile-icon">
+        <i class="gg-profile" />
       </span>
     </button>
   </div>
   <div class="dropdown-menu" id="dropdown-menu" role="menu">
     <div class="dropdown-content">
       <a href="/watchlist" class="dropdown-item" use:link>
-        <!-- href="../Wishlist/Wishlist.svelte"  -->
         Watchlist
       </a>
       <a on:click={signout} href="#" class="dropdown-item"> Logout </a>
     </div>
   </div>
 </div>
+
+<style>
+  .btn-icon{
+    background-color: transparent;
+    color: white;
+
+  }
+
+  .btn-icon:hover{
+    color: black;
+  }
+</style>

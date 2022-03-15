@@ -11,6 +11,7 @@
   export let data;
 
   $: if (id && !data) {
+    console.log("calling here", id, data);
     getAnimeById(id).then((e) => {
       data = e.data;
     });

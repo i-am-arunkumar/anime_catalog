@@ -18,11 +18,17 @@ export function getCurrentFilter() {
 
 export async function randomAnime() {
     navigate("/details")
-    return getRandomAnimes().then(data => {
-        navigate(`/details/${data.data.mal_id}`, { replace: true, data: data.data })
-    })
+    var data = await getRandomAnimes()  
+    for(var i=0;i<3;i++)
+    {
+        if(data.data.rating.includes("Nudity") || data.data.rating.includes("Hentai"))
+            continue;
+        else{
+            navigate(`/details/${data.data.mal_id}`, { replace: true,state :{ data: data.data} });
+            break;   
+        } 
+    }
 }
-
 
 export function setFilter(filter, params, start_from_begining = true) {
     if (start_from_begining)
@@ -30,9 +36,7 @@ export function setFilter(filter, params, start_from_begining = true) {
     if (location.pathname !== "/") navigate("/")
     animeList.set(null)
     current_filter.set({ id: filter, params: params })
-    console.log(params);
     filter_fetch[filter](params).then(res => {
-        console.log(res);
         pagination.set(res.pagination)
         animeList.set(res.data)
     })
