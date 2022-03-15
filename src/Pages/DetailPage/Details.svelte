@@ -2,7 +2,10 @@
   export let data;
 
 import { getAuth } from "firebase/auth";
-import { updateWatchlist } from "../../utils/database";
+import { updateWatchlist ,removeAnime } from "../../utils/database";
+import { db } from "../../utils/firebase";
+import { ref, get} from "firebase/database";
+import { onMount } from "svelte";
 
 const auth = getAuth();
 
@@ -11,6 +14,8 @@ function addwatchList(e){
   const user = auth.currentUser;
   if (user) {
     updateWatchlist(user.uid,data).then(() => {
+find=1;
+console.log(find);
 alert("Added to watchlist!!")  
 }).catch((error) => {
   const errorCode = error.code;
@@ -22,6 +27,39 @@ alert("Added to watchlist!!")
     confirm("Please log in to add watchlist!!")
   }
 }
+
+function removewatchList(e){
+  const user = auth.currentUser;
+  removeAnime(user.uid,data).then(() => {
+ find=0;
+}).catch((error) => {
+  const errorCode = error.code;
+    console.log(errorCode);
+});
+
+}
+
+let find=2;
+
+async function check(user){
+  const x = await get(ref(db,`watchlist/${user.uid}/${data.mal_id}`))
+    return x.exists() ?  true : false;
+}
+
+onMount(() => {
+  const user = auth.currentUser;
+  if (user) {                                    
+    check(user).then((x) => {
+      if(x)
+      find=1;
+      else
+      find=0;
+      })
+}
+  else{
+    return false;
+  }
+});
 
 </script>
 
@@ -42,12 +80,22 @@ alert("Added to watchlist!!")
   </footer>
 </div>
 <div class="my-6 container">
+  {#if find===1}
+  <button class="button is-danger" on:click={removewatchList}>
+    <span class="icon">
+      <i class="gg-remove-r"></i>
+    </span>
+    <span>Remove</span>
+  </button>
+{:else if find===0}
   <button class="button is-dark" on:click={addwatchList}>
     <span class="icon">
       <i class="gg-add-r" />
     </span>
     <span>Add to Watchlist</span>
   </button>
+{/if}
+
 </div>
 <div class="container">
   <h1 class="title is-4">Synopsis</h1>

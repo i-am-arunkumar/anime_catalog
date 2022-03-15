@@ -18,6 +18,12 @@ export async function updateWatchlist(user_id, data) {
     return 
 }
 
+export async function removeAnime(user_id, data) {
+  //  console.log(data);
+    const snap = await set(ref(db,`watchlist/${user_id}/${data.mal_id}`),null)
+    return 
+}
+
 export async function getWatchListData(user_id){
   const snapshot =  await get(ref(db, `watchlist/${user_id}`))
   if (snapshot.exists()) {
