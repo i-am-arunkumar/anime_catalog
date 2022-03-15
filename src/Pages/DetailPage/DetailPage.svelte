@@ -6,12 +6,14 @@
   import Details from "./Details.svelte";
   import Recommendations from "./Recommendations.svelte";
   import { getAnimeById } from "../../utils/api";
+import { setCurrentFilter } from "../../utils/filter_utils";
 
   export let id;
   export let data;
 
+  setCurrentFilter("details")
+
   $: if (id && !data) {
-    console.log("calling here", id, data);
     getAnimeById(id).then((e) => {
       data = e.data;
     });

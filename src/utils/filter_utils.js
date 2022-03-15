@@ -15,8 +15,12 @@ export function getCurrentFilter() {
     return get_store_value(current_filter)
 }
 
+export function setCurrentFilter(id, params) {
+    current_filter.set({ id: id , params : params })
+}
 
 export async function randomAnime() {
+    current_filter.set({ id: "random" })
     navigate("/details")
     var data = await getRandomAnimes()  
     for(var i=0;i<3;i++)
