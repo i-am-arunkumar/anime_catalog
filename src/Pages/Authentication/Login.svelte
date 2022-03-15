@@ -93,7 +93,7 @@ variable3=""
             bind:this={email}
           />
           <span class="icon is-small is-left">
-            <i class="fas fa-envelope" />
+            <i class="gg-mail"></i>
           </span>
           <span class="icon is-small is-right">
             <i class="fas fa-exclamation-triangle" />
@@ -112,7 +112,7 @@ variable3=""
             bind:this={pass}
           />
           <span class="icon is-small is-left">
-            <i class="fas fa-lock" />
+            <i class="gg-eye"></i>
           </span>
         </p>
         <p class="help is-danger">{variable2}</p>

@@ -7,7 +7,7 @@
 	import {currentPage } from "../../store/anime";
 
 	const auth = getAuth();
-	let userdata = []
+	let userdata 
 
 	onMount(() => {
 		const user = auth.currentUser;

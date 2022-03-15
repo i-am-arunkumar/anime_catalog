@@ -140,7 +140,7 @@ ninvalid="";
         <div class="control has-icons-left has-icons-right">
           <input class={`input ${uninvalid ? "is-danger" : ''}`} type="text" placeholder="Text input" value="" bind:this={uname}>
           <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
+            <i class="gg-user"></i>
           </span>
           <span class="icon is-small is-right">
             <i class="fas fa-check"></i>
@@ -157,7 +157,7 @@ ninvalid="";
         <div class="control has-icons-left has-icons-right">
           <input class={`input ${einvalid ? "is-danger" : ''}`} type="email" placeholder="Email input" value="" bind:this={email}>
           <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
+            <i class="gg-mail"></i>
           </span>
           <span class="icon is-small is-right">
             <i class="fas fa-exclamation-triangle"></i>
@@ -174,7 +174,7 @@ ninvalid="";
         <div class="control has-icons-left">
           <input class={`input ${pinvalid ? "is-danger" : ''}`} type="password" placeholder="Password" bind:this={pass} >
           <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="gg-eye"></i>
           </span>          
         </div>    
         <p class={`help ${pinvalid ? "is-danger" : ''}`}>password is weak</p>
