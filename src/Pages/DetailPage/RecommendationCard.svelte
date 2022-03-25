@@ -1,11 +1,8 @@
 <script>
   import { navigate } from "svelte-routing";
-  import { selectedAnime } from "../../store/anime";
-
   export let data;
 
   function viewDetails() {
-    selectedAnime.set(null);
     navigate(`/details/${data.mal_id}`);
   }
 </script>

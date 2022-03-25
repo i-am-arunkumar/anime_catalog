@@ -14,8 +14,8 @@
             {:else}
             <section class="section">
                 <h1 class="title">No Animes</h1>
-                <h2 class="subtitle">
-                  Looks like there is no animes for your query
+                <h2 class="subtitle my-4">
+                  Looks like there is no animes for you
                 </h2>
               </section>
             {/each}

@@ -1,7 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
-	import Transition from './../../SharedComponents/Transition.svelte';
-  import { selectedAnime as data } from "../../store/anime";
   import { getReview } from "../../utils/api";
   import Review from "./ReviewCard.svelte";
   export let id;

@@ -6,12 +6,12 @@
   import Details from "./Details.svelte";
   import Recommendations from "./Recommendations.svelte";
   import { getAnimeById } from "../../utils/api";
-import { setCurrentFilter } from "../../utils/filter_utils";
+  import { setCurrentFilter } from "../../utils/filter_utils";
 
   export let id;
   export let data;
 
-  setCurrentFilter("details")
+  setCurrentFilter("details");
 
   $: if (id && !data) {
     getAnimeById(id).then((e) => {
@@ -28,6 +28,10 @@ import { setCurrentFilter } from "../../utils/filter_utils";
 
   function selectTab(i) {
     selected_index = i;
+  }
+
+  function safeJoin(data, index) {
+    return (data && data.map((s) => s[index]).join(", ")) || "";
   }
 </script>
 
@@ -52,7 +56,10 @@ import { setCurrentFilter } from "../../utils/filter_utils";
                 </div>
               </div>
               <div class="parallax-back">
-                <img src={data.images && data.images.webp.large_image_url} class="picture img-responsive rounded" />
+                <img
+                  src={data.images && data.images.webp.large_image_url}
+                  class="picture img-responsive rounded"
+                />
               </div>
             </div>
           </div>
@@ -69,7 +76,7 @@ import { setCurrentFilter } from "../../utils/filter_utils";
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Producers:</h1>
               <p class="producer subtitle m-0 is-6">
-                {data.producers.map((s) => s.name).join(", ")}
+                {safeJoin(data.producers,"name")}
               </p>
             </div>
             <div class="panel-block is-active">
@@ -79,13 +86,13 @@ import { setCurrentFilter } from "../../utils/filter_utils";
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Licensors:</h1>
               <p class="subtitle m-0 is-6">
-                {data.licensors.map((s) => s.name).join(", ")}
+                {safeJoin(data.licensors,"name")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Studios:</h1>
               <p class="subtitle m-0 is-6">
-                {data.studios.map((s) => s.name).join(", ")}
+                {safeJoin(data.studios,"name")}
               </p>
             </div>
             <div class="panel-block is-active">
@@ -95,19 +102,19 @@ import { setCurrentFilter } from "../../utils/filter_utils";
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Genres:</h1>
               <p class="subtitle m-0 is-6">
-                {data.genres.map((s) => s.name).join(", ")}
+                {safeJoin(data.genres,"name")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Themes:</h1>
               <p class="subtitle m-0 is-6">
-                {data.themes.map((s) => s.name).join(", ")}
+                {safeJoin(data.themes,"name")}
               </p>
             </div>
             <div class="panel-block is-active">
               <h1 class="title is-6 m-2">Demographic:</h1>
               <p class="subtitle m-0 is-6">
-                {data.demographics.map((s) => s.name).join(", ")}
+                {safeJoin(data.demographics,"name")}
               </p>
             </div>
             <div class="panel-block is-active">

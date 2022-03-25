@@ -13,9 +13,14 @@
 		const user = auth.currentUser;
 		currentPage.set(1);
 		getWatchListData(user.uid).then((d) => {
-			userdata = Object.values(d).map((a, i) => ({
+			if(d){
+				userdata = Object.values(d).map((a, i) => ({
 				...a,
-			}))
+				}))
+			}else{
+				userdata = []
+			}
+			
 		});
 	});
 

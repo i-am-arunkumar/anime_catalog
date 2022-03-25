@@ -1,12 +1,10 @@
 <script>
   import { navigate } from "svelte-routing";
-  import { selectedAnime } from "../store/anime";
 
   export let data;
   let img = data.images.jpg.image_url;
 
   function openDetailsPage() {
-    //selectedAnime.set(data)
     navigate(`/details/${data.mal_id}`, { state: {data} });
   }
 </script>

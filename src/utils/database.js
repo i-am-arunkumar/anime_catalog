@@ -27,7 +27,6 @@ export async function removeAnime(user_id, data) {
 export async function getWatchListData(user_id){
   const snapshot =  await get(ref(db, `watchlist/${user_id}`))
   if (snapshot.exists()) {
-    console.log(snapshot.val());
     return snapshot.val();
   } else {
     console.log("No data available");
