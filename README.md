@@ -37,7 +37,7 @@ font-family: 'Merriweather', serif;
 
 #### Task
 
-Gopi  - Login, signup and firebase auth integration
+Gopi  - Login, signup, watch list, recommendation and firebase auth integration
 
 Ak - Home page
 
